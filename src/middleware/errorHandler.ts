@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { ApiError } from './apiError';
 
 export function errorHandler(
-  err: any,
+  err: unknown,
   req: Request,
   res: Response,
   next: NextFunction
