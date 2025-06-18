@@ -1,0 +1,27 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Book {
+  isbn           String   @id
+  title          String
+  author         String
+  publishedYear  Int
+  totalCopies    Int
+  description    String
+  rentals        Rental[]
+}
+
+model Rental {
+  id         String   @id @default(uuid())
+  book       Book     @relation(fields: [bookIsbn], references: [isbn])
+  bookIsbn   String
+  userId     String
+  rentedAt   DateTime @default(now())
+  returnedAt DateTime?
+}
